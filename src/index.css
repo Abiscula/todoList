@@ -1,0 +1,8 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: hsl(235, 21%, 11%);
+  font-family: 'Josefin Sans', sans-serif;
+  color: #fefefe;
+  font-size: 18px;
+}
