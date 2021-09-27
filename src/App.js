@@ -1,34 +1,27 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import backIMG from './components/styles/images/desktop-dark.jpg'
+import * as s from './components/styles/styled-App'
 import ListArea from './components/ListArea'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: url(${backIMG}) no-repeat;
-  align-items: center;
-`
-
-const Header = styled.header`
-  display: flex;
-`
-
-const Footer = styled.footer`
-  display: flex;
-`
+import {ReactComponent as Sun} from './components/styles/images/icon-sun.svg'
+import {ReactComponent as Moon} from './components/styles/images/icon-moon.svg'
 
 function App() {
-
   const [items, setItems] = useState([])
+  const [theme, setTheme] = useState(1)
+  const body = document.querySelector('body')
+  theme === 1 ? body.style.background = '#161722' : body.style.background = '#fafafa' // altera o backgroundcolor com base no estado
 
-  console.log(items)
   return (
-    <Container>
-      <Header />
-      <ListArea setItems={setItems} items={items}/>
-      <Footer>teste</Footer>
-    </Container>
+    <s.Container theme={theme}>
+      <s.Header>
+        <title>TODO</title>
+        {(theme === 1 
+        ? <Sun onClick={() => setTheme(2)}className="sun"/>  // altera background para light
+        : <Moon onClick={() => setTheme(1)} className="moon"/>) // altera background para dark
+        }
+      </s.Header>
+      <ListArea setItems={setItems} items={items} theme={theme}/>
+      <footer>Drag and drop to reorder list</footer>
+    </s.Container>
     
   );
 }

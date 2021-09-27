@@ -3,6 +3,59 @@ body {
   margin: 0;
   background: hsl(235, 21%, 11%);
   font-family: 'Josefin Sans', sans-serif;
-  color: #fefefe;
   font-size: 18px;
+}
+
+
+
+/* ----------------------- Checkbox area ----------------------- */
+input[type=checkbox] {
+  display: none;
+}
+
+input ~ .checkSpan { 
+  border: 1px solid #cccbcb;
+}
+
+input:checked ~ .checkSpan { /*adiciona background qnd o checkbox esta ativo 'checked' */
+  background: linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  border: none;
+}
+
+input:checked ~ .checkSpan:after { /*exibe a span com as estilizações quando checkbox ativo */
+  display: block;
+}
+
+.checkSpan {
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  border-radius: 25px;
+}
+
+.checkSpan:after { /*cria o "check" do checkbox */
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkSpan:after { /*personaliza/estiliza o "check" do checkbox */
+  left: 8px;
+  top: 3px;
+  width: 4.5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.item {
+  margin-top: 1px;
+  margin-left: 2.5rem;
+}
+
+input:checked ~ .item {
+  text-decoration: line-through;
 }

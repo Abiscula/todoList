@@ -1,34 +1,35 @@
-import React from 'react'
-import styled from  'styled-components'
-
-const TodoList = styled.div`
-    background: #25273c;
-    margin-top: 1.5rem;
-
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-
-    ul li {
-        padding: 1em 0;
-        border-bottom: 1px solid #CCC;
-    }
-`
+import React, { useState } from 'react'
+import * as s from './styles/List'
 
 export default function List({items}) {
+    const [status, setStatus] = useState([])
     return(
-        <TodoList>
+        <s.TodoList>
             <ul>
-                {items.map((item ) => {
-                    return(
-                    <li><input type="checkbox"/>{item}</li>
+                {items.map((item, key) => {
+
+                    function handleCheck(event) { //verifica se o item esta com status "checked"      
+                        (event.target.checked ? setStatus([...status, key]) : status.splice(status.indexOf(key), 1))
+                    }
+
+                    return( 
+                        <li key={key}> 
+                            <s.Checkbox> <input type="checkbox" onChange={handleCheck} />
+                            <span className="checkSpan" /></s.Checkbox> 
+                            <a>{item}</a>
+                        </li>
                     )
                 })}
             </ul>
-            <p>rodapé da lista</p>
-        </TodoList>
+            <div>
+                <s.CountItems>{items.length} items left</s.CountItems>
+                <s.StatusFilters>
+                    <span>All</span>
+                    <span>Active</span>
+                    <span>Completed</span>
+                </s.StatusFilters>
+                <span>Clear Completed</span>
+            </div>
+        </s.TodoList>
     )
 }
