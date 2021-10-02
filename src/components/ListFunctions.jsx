@@ -1,7 +1,10 @@
 import React from 'react'
+import { useAuth } from '../providers/auth'
 import * as s from './styles/styled-ListFunctions'
 
-export default function ListFunction({items, theme, setLineFilter, setItems}) {
+export default function ListFunction({theme }) {
+
+    const { items, setLineFilter, setItems} = useAuth()
 
     function handleAll() {
         setLineFilter('all')

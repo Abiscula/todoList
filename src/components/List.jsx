@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ListFunctions from './ListFunctions'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import * as s from './styles/styled-List'
 import {ReactComponent as Close} from './styles/images/close.svg'
+import { useAuth } from '../providers/auth'
 
-export default function List({items, setItems, theme, lineFilter, setLineFilter}) {
+export default function List({theme}) {
+
+    const { items, setItems, lineFilter } = useAuth()
 
     function itemChecked(checked, itemId) { //criando copia do array original para poder modifica-lo
         const itemsCopy = [...items]
@@ -29,7 +32,6 @@ export default function List({items, setItems, theme, lineFilter, setLineFilter}
         showItems = showItems.filter(item => item.id !== id)
         setItems(showItems) 
     }
-
 
     function handleOnDragEnd(result) { //função para mover os items (drag and drop)
         if(!result.destination) return;
@@ -71,10 +73,7 @@ export default function List({items, setItems, theme, lineFilter, setLineFilter}
                 </Droppable>
             </DragDropContext>
             <ListFunctions 
-                items={items} 
                 theme={theme} 
-                setLineFilter={setLineFilter}
-                setItems={setItems}
             />
         </s.TodoList>
     )

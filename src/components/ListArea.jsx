@@ -1,8 +1,12 @@
 import React from 'react'
 import * as s from './styles/styled-ListArea'
 import List from './List'
+import { useAuth } from '../providers/auth'
 
-export default function ListArea({setItems, items, theme, lineFilter, setLineFilter}) {
+export default function ListArea({theme}) {
+
+    const { items, setItems } = useAuth()
+
     return(
         <s.ListContainer >
             <s.SearchField 
@@ -16,11 +20,7 @@ export default function ListArea({setItems, items, theme, lineFilter, setLineFil
                 }}
             />
             <List 
-                items={items} 
                 theme={theme}
-                lineFilter={lineFilter}
-                setLineFilter={setLineFilter}
-                setItems={setItems}
             />
         </s.ListContainer>
     )
